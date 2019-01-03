@@ -17,14 +17,14 @@ public class MinesweeperApplicationTests {
 
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
-	
+
 	@Test
 	public void testBeginToestandVakje() {
 		Vakje vakje = new Vakje();
 		VakjeToestandEnum beginToestand = vakje.getToestand();
 		assertEquals(VakjeToestandEnum.dicht, beginToestand);
 	}
-	
+
 	@Test
 	public void testKlikVakje() {
 		Vakje vakje = new Vakje();
@@ -32,6 +32,7 @@ public class MinesweeperApplicationTests {
 		VakjeToestandEnum toestand = vakje.getToestand();
 		assertEquals(VakjeToestandEnum.open, toestand);
 	}
+
 	@Test
 	public void testMarkeer() {
 		Vakje vakje = new Vakje();
@@ -39,6 +40,7 @@ public class MinesweeperApplicationTests {
 		VakjeToestandEnum toestand = vakje.getToestand();
 		assertEquals(VakjeToestandEnum.gemarkeerd, toestand);
 	}
+
 	@Test
 	public void testDubbelMarkeer() {
 		Vakje vakje = new Vakje();
@@ -47,6 +49,7 @@ public class MinesweeperApplicationTests {
 		VakjeToestandEnum toestand = vakje.getToestand();
 		assertEquals(VakjeToestandEnum.dicht, toestand);
 	}
+
 	@Test
 	public void testNietKlikkenOpMarkeer() {
 		Vakje vakje = new Vakje();
@@ -55,6 +58,7 @@ public class MinesweeperApplicationTests {
 		VakjeToestandEnum toestand = vakje.getToestand();
 		assertEquals(VakjeToestandEnum.gemarkeerd, toestand);
 	}
+
 	@Test
 	public void testNietMarkerenIndienOpen() {
 		Vakje vakje = new Vakje();
@@ -63,6 +67,7 @@ public class MinesweeperApplicationTests {
 		VakjeToestandEnum toestand = vakje.getToestand();
 		assertEquals(VakjeToestandEnum.open, toestand);
 	}
+
 	@Test
 	public void testKlikOpBomVakje() {
 		Vakje vakje = new BomVakje();
@@ -70,47 +75,39 @@ public class MinesweeperApplicationTests {
 		VakjeToestandEnum toestand = vakje.getToestand();
 		assertEquals(VakjeToestandEnum.ontploft, toestand);
 	}
-	
+
 	@Test
 	public void testGeenBurenOpvragenWanneerNietOpen() {
 		Vakje vakje = new Vakje();
 		exception.expect(IllegalStateException.class);
 		int aantalBuren = vakje.getAantalBomBuren();
 	}
-	
+
 	@Test
 	public void testAantalBuren() {
 		Vakje vakje = new Vakje();
-		Set<Vakje> buren = Set.of(
-				new Vakje(), new BomVakje(), new Vakje(),
-				new Vakje(), new BomVakje()
-				);
+		Set<Vakje> buren = Set.of(new Vakje(), new BomVakje(), new Vakje(), new Vakje(), new BomVakje());
 		vakje.setBuren(buren);
 		vakje.klik();
 		int aantalBuren = vakje.getAantalBomBuren();
 		assertEquals(2, aantalBuren);
 	}
+
 	@Test
 	public void testVasteVeldGeneratorMetFoutePositie() {
-		Set<Positie> posities = Set.of(
-				    new Positie(1,1),
-					new Positie(3, 1)
-				);
+		Set<Positie> posities = Set.of(new Positie(1, 1), new Positie(3, 1));
 		exception.expect(IllegalArgumentException.class);
 		VeldGenerator generator = new VastVeldGenerator(3, 3, posities);
 	}
+
 	@Test
 	public void testVasteVeldGeneratorOpvragenBuitenDimensies() {
-		Set<Positie> posities = Set.of(
-			    new Positie(1,1),
-				new Positie(2, 1)
-			);
+		Set<Positie> posities = Set.of(new Positie(1, 1), new Positie(2, 1));
 
-	VeldGenerator generator = new VastVeldGenerator(3, 3, posities);	
-	exception.expect(IllegalArgumentException.class);
-	exception.expectMessage("Kolom 3 is groter dan 3");
-	boolean isBom = generator.isBom(0, 3);
+		VeldGenerator generator = new VastVeldGenerator(3, 3, posities);
+		exception.expect(IllegalArgumentException.class);
+		exception.expectMessage("Kolom 3 is groter dan 3");
+		boolean isBom = generator.isBom(0, 3);
 	}
 
 }
-
