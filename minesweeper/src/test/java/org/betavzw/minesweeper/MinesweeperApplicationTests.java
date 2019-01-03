@@ -90,6 +90,27 @@ public class MinesweeperApplicationTests {
 		int aantalBuren = vakje.getAantalBomBuren();
 		assertEquals(2, aantalBuren);
 	}
+	@Test
+	public void testVasteVeldGeneratorMetFoutePositie() {
+		Set<Positie> posities = Set.of(
+				    new Positie(1,1),
+					new Positie(3, 1)
+				);
+		exception.expect(IllegalArgumentException.class);
+		VeldGenerator generator = new VastVeldGenerator(3, 3, posities);
+	}
+	@Test
+	public void testVasteVeldGeneratorOpvragenBuitenDimensies() {
+		Set<Positie> posities = Set.of(
+			    new Positie(1,1),
+				new Positie(2, 1)
+			);
+
+	VeldGenerator generator = new VastVeldGenerator(3, 3, posities);	
+	exception.expect(IllegalArgumentException.class);
+	exception.expectMessage("Kolom 3 is groter dan 3");
+	boolean isBom = generator.isBom(0, 3);
+	}
 
 }
 
