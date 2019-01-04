@@ -4,11 +4,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 public abstract class VeldGenerator {
-	protected int rijen;
-	protected int kolommen;
+	private int rijen;
+	private int kolommen;
 	protected Set<Positie> posities = new HashSet<>();
 	
-
+	public VeldGenerator(int rijen, int kolommen) {
+		this.rijen = rijen;
+		this.kolommen = kolommen;
+	}
 	public int getAantalRijen() {
 		return rijen;
 	}

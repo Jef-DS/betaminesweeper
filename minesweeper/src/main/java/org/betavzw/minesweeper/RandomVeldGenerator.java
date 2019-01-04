@@ -4,8 +4,7 @@ import java.util.Random;
 
 public class RandomVeldGenerator extends VeldGenerator {
 	public RandomVeldGenerator(int rijen, int kolommen, int aantalBommen) {
-		this.rijen = rijen;
-		this.kolommen = kolommen;
+		super(rijen, kolommen);
 		Random rnd = new Random();
 		while(posities.size() < aantalBommen){
 			int rij = rnd.nextInt(rijen);

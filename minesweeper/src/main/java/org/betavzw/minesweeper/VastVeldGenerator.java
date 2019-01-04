@@ -5,8 +5,7 @@ import java.util.Set;
 public class VastVeldGenerator extends VeldGenerator{
 
 	public VastVeldGenerator(int rijen, int kolommen, Set<Positie> posities) {
-		this.rijen = rijen;
-		this.kolommen = kolommen;
+		super(rijen, kolommen);
 		for(Positie p: posities) {
 			if (p.getX() >= rijen || p.getY() >= kolommen) throw new IllegalArgumentException();
 		}
