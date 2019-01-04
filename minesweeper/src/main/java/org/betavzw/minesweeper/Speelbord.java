@@ -31,6 +31,21 @@ public class Speelbord {
 			toestand = BordToestandEnum.verloren;
 		}
 	}
+	public UIVakjeToestandEnum getToestandVakje(int rij, int kolom) {
+		switch(vakjes[rij][kolom].getToestand()) {
+		case dicht:
+			return UIVakjeToestandEnum.nietgeklikt;
+
+		case gemarkeerd:
+			return UIVakjeToestandEnum.gemarkeerd;
+		case ontploft:
+			return UIVakjeToestandEnum.mijn;
+		case open:
+			return UIVakjeToestandEnum.values()[3 + vakjes[rij][kolom].getAantalBomBuren()];
+		
+		}
+		throw new IllegalStateException("Onbekende toestand " + vakjes[rij][kolom].getToestand());
+	}
 	public BordToestandEnum getToestand() {
 		return toestand;
 	}
