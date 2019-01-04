@@ -1,5 +1,9 @@
 package org.betavzw.minesweeper;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 public class Speelbord {
 	private int aantalRijen;
 	private int aantalKolommen;
@@ -19,6 +23,22 @@ public class Speelbord {
 				}
 			}
 		}
+		for(int rij=0; rij<this.aantalRijen;rij++) {
+			for(int kolom=0;kolom<this.aantalKolommen;kolom++) {	
+		       Set<Vakje> buren = new HashSet<Vakje>()	;
+		       int minRij = Math.max(rij -1, 0);
+		       int maxRij = Math.min( rij + 2, aantalRijen);
+		       int minKolom = Math.max(kolom -1, 0);
+		       int maxKolom = Math.min(kolom + 2, aantalKolommen);
+		       for(int i= minRij; i< maxRij;i++) {
+		    	   for(int j = minKolom; j < maxKolom; j++) {
+		    		   if (i == rij && j == kolom) continue;
+		    		   buren.add(vakjes[i][j]);
+		    	   }
+		       }
+		       vakjes[rij][kolom].setBuren(buren);
+			}
+		}
 	}
 	public int getAantalRijen() {
 		return aantalRijen;
@@ -27,7 +47,8 @@ public class Speelbord {
 		return aantalKolommen;
 	}
 	public void klikVakje(int rij, int kolom) {
-		if(vakjes[rij][kolom].getClass().equals(BomVakje.class)) {
+		vakjes[rij][kolom].klik();
+		if(vakjes[rij][kolom].getToestand() == VakjeToestandEnum.ontploft) {
 			toestand = BordToestandEnum.verloren;
 		}
 	}

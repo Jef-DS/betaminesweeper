@@ -1,6 +1,7 @@
 package org.betavzw.minesweeper;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 public class Vakje {
 	protected VakjeToestandEnum toestand;
@@ -8,6 +9,7 @@ public class Vakje {
 
 	public Vakje() {
 		toestand = VakjeToestandEnum.dicht;
+		buren = new HashSet<>();
 	}
 
 	public VakjeToestandEnum getToestand() {
