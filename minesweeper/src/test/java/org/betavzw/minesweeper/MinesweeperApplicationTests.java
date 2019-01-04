@@ -109,5 +109,15 @@ public class MinesweeperApplicationTests {
 		exception.expectMessage("Kolom 3 is groter dan 3");
 		boolean isBom = generator.isBom(0, 3);
 	}
+	@Test
+	public void testRijenEnKolommenVanSpeelbord() {
+		Set<Positie> posities = Set.of(new Positie(0, 0));
+		VeldGenerator generator = new VastVeldGenerator(3, 4, posities);
+		Speelbord bord= new Speelbord(generator);
+		int aantalRijen = bord.getAantalRijen();
+		int aantalKolommen = bord.getAantalKolommen();
+		assertEquals(3, aantalRijen);
+		assertEquals(4, aantalKolommen);
+	}
 
 }
