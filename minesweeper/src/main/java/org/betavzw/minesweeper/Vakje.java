@@ -19,6 +19,13 @@ public class Vakje {
 	public void klik() {
 		if (toestand != VakjeToestandEnum.gemarkeerd) {
 			toestand = VakjeToestandEnum.open;
+			if (getAantalBomBuren() == 0) {
+				for (Vakje v: buren) {
+					if (v.getToestand() == VakjeToestandEnum.dicht) {
+						v.klik();
+					}
+				}
+			}
 		}
 	}
 

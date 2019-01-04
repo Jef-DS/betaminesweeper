@@ -157,4 +157,15 @@ public class MinesweeperApplicationTests {
 				
 		assertEquals(UIVakjeToestandEnum.tweeburen, toestand);
 	}
+	@Test
+	public void testAutomatischDoorKlikken() {
+		Set<Positie> posities = Set.of(new Positie(0,2), new Positie(1, 2));
+		VeldGenerator generator = new VastVeldGenerator(3, 3, posities);
+		Speelbord bord = new Speelbord(generator);
+		bord.klikVakje(0, 0);
+		UIVakjeToestandEnum geenburen = bord.getToestandVakje(2, 0);
+		UIVakjeToestandEnum dicht = bord.getToestandVakje(2, 2);
+		assertEquals(UIVakjeToestandEnum.nulburen, geenburen);
+		assertEquals(UIVakjeToestandEnum.nietgeklikt, dicht);
+	}
 }
