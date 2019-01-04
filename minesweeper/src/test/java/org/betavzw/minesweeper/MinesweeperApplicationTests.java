@@ -120,4 +120,22 @@ public class MinesweeperApplicationTests {
 		assertEquals(4, aantalKolommen);
 	}
 
+	@Test
+	public void testBeginToestandBord() {
+		Set<Positie> posities = Set.of(new Positie(0, 0));
+		VeldGenerator generator = new VastVeldGenerator(3, 4, posities);
+		Speelbord bord= new Speelbord(generator);
+		BordToestandEnum toestand = bord.getToestand();
+		assertEquals(BordToestandEnum.gestart, toestand);
+	}
+	
+	@Test
+	public void testBordVerloren() {
+		Set<Positie> posities = Set.of(new Positie(1,2));
+		VeldGenerator generator = new VastVeldGenerator(3, 4, posities);
+		Speelbord bord= new Speelbord(generator);
+		bord.klikVakje(1, 2);
+		BordToestandEnum toestand = bord.getToestand();
+		assertEquals(BordToestandEnum.verloren, toestand);
+	}
 }
