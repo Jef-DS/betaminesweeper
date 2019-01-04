@@ -138,4 +138,13 @@ public class MinesweeperApplicationTests {
 		BordToestandEnum toestand = bord.getToestand();
 		assertEquals(BordToestandEnum.verloren, toestand);
 	}
+	@Test
+	public void testBordKlikVakje() {
+		Set<Positie> posities = Set.of(new Positie(2,2));
+		VeldGenerator generator = new VastVeldGenerator(3, 3, posities);
+		Speelbord bord= new Speelbord(generator);
+		bord.klikVakje(0, 0);
+		UIVakjeToestandEnum toestand = bord.getToestandVakje(0, 0);
+		assertEquals(UIVakjeToestandEnum.nulburen, toestand);
+	}
 }
