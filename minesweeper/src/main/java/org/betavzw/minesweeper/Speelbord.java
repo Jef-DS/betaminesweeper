@@ -60,6 +60,18 @@ public class Speelbord {
 		vakjes[rij][kolom].klik();
 		if (vakjes[rij][kolom].getToestand() == VakjeToestandEnum.ontploft) {
 			toestand = BordToestandEnum.verloren;
+		}else {
+			for(int r=0;r<getAantalRijen();r++) {
+				for(int k=0;k<getAantalKolommen();k++) {
+					if ((vakjes[r][k].getToestand() == VakjeToestandEnum.dicht
+							|| vakjes[r][k].getToestand() == VakjeToestandEnum.gemarkeerd)
+							&& ! vakjes[r][k].getClass().equals(BomVakje.class)) {
+						return;
+					}
+				}
+				
+			}
+			toestand = BordToestandEnum.gewonnen;
 		}
 	}
 
